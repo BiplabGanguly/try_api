@@ -1,0 +1,58 @@
+{% extends 'temp.html' %}
+
+{% block content %}
+<style>
+    .index-container {
+        margin-top: 5vh;
+    }
+
+    .card {
+        background-color: #393E46;
+        color: white;
+        box-shadow: 0 0 8px black;
+        border-radius: 16px;
+        text-align: center;
+        text-decoration: none;
+        margin-top: 5vh;
+    }
+
+    .card:hover {
+        color: white;
+    }
+
+
+    .card-body P {
+        text-align: justify;
+    }
+
+    .link-index {
+        text-decoration: none;
+    }
+
+    .index-col{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+<div class="container index-container">
+    <div class="row">
+        {% for pro in project %}
+        <div class="col-md-4 index-col">
+            <a class="card" style="width: 18rem;" href="{% url 'api' project=pro.project_title pid=pro.id %}">
+                <div class="card-body">
+                    <h5 class="card-title">{{pro.project_title}}</h5>
+                    <hr>
+                    <p class="card-text">{{pro.project_description}}</p>
+                </div>
+            </a>
+        </div>
+       {%endfor%}
+    </div>
+</div>
+
+
+
+
+{% endblock %}

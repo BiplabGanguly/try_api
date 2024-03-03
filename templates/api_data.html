@@ -1,0 +1,43 @@
+{% extends 'temp.html' %}
+
+{% block content %}
+<style>
+    .api-container {
+        margin-top: 5vh;
+    }
+
+    .api-card {
+        margin-top: 5vh;
+        background-color: #222831;
+        color: white;
+    }
+
+    .card-body {
+        display: flex;
+    }
+
+    .card-body h6 {
+        margin-left: 15vh;
+    }
+
+    .btn-desc{
+        background-color: #222831;
+        color: white;
+        box-shadow: 0 0 6px #393E46;
+    }
+</style>
+<div class="container api-container">
+    <div class="row">
+        {% for api in api_data %}
+        <div class="card api-card"
+            style="box-shadow: 0 0 8px {% if api.api_method == 'GET' %}green{% else %}red{% endif %};">
+            <div class="card-body row">
+                <div class="col-md-2" style="text-align: center; font-size: 2.8vh; margin-top: .8vh;">{{ api.api_method }}</div>
+                <div class="col-md-8" style="text-align: center; margin-top: 1.2vh;">{{api.api_data}}</div>
+                <div class="col-md-2" style="text-align: center;"><button class="btn btn-desc form-control">desc</button></div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
