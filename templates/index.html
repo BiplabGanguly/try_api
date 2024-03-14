@@ -3,7 +3,7 @@
 {% block content %}
 <style>
     .index-container {
-        margin-top: 5vh;
+        margin-top: 5rem;
     }
 
     .card {
@@ -39,7 +39,7 @@
 <div class="container index-container">
     <div class="row">
         {% for pro in project %}
-        <div class="col-md-4 index-col">
+        <div class="col-md-6 col-lg-4 col-sm-6 index-col">
             <a class="card" style="width: 18rem;" href="{% url 'api' project=pro.project_title pid=pro.id %}">
                 <div class="card-body">
                     <h5 class="card-title">{{pro.project_title}}</h5>
