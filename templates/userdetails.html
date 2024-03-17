@@ -1,6 +1,97 @@
-<form action="{% url 'post_login' %}" method="post">
-    {%csrf_token%}
-    <input type="text" name="username">
-    <input type="text" name="password">
-    <input type="submit" value="submit">
-</form>
+{% extends 'temp.html' %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #393E46;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    .user_box {
+        margin-top: 30vh;
+    }
+
+    .form_box {
+        padding: 2vh;
+    }
+
+    .input-box {
+        background-color: #393E46;
+        border: none;
+        border-bottom: 1px solid black;
+        color: white;
+    }
+
+    .input-box:focus {
+        background-color: #393E46;
+        border: none;
+        border-bottom: 3px solid black;
+        color: white;
+        outline: none;
+    }
+
+    .btn-signin {
+        color: white;
+        box-shadow: 0 0 12px black;
+        background-color: #393E46;
+        border-radius: 12px;
+        text-align: center;
+    }
+
+    .btn-signin:hover {
+        color: white;
+        box-shadow: 0 0 12px black;
+        background-color: #393E46;
+        border-radius: 12px;
+        text-align: center;
+    }
+
+    .btn-signin:active {
+        color: white;
+        box-shadow: 0 0 12px black;
+        background-color: #393E46;
+        border-radius: 12px;
+        text-align: center;
+    }
+</style>
+<div class="container">
+    <div class="row user_box">
+        <form action="{% url 'post_login' %}" method="post" class="form">
+            {%csrf_token%}
+            <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 form_box">
+                <input type="text" name="username" class="form-control input-box" placeholder="username">
+            </div>
+            <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 form_box">
+                <div class="row">
+                    <div class="col-8">
+                        <input type="password" name="password" class="form-control input-box" placeholder="password"
+                            id="password">
+                    </div>
+                    <div class="col-4">
+                        <button type="button" class="btn form-control btn-signin" id="checkpass"
+                            onclick="changeText()">show</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 offset-lg-5 col-md-4 offset-md-4 form_box">
+                <button type="submit" class="btn btn-signin form-control ">Sign In</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function changeText() {
+        let button = document.getElementById("checkpass");
+        let pass = document.getElementById("password");
+        if (button.textContent === "show") {
+            pass.type = "text";
+            button.textContent = "hide";
+        } else {
+            pass.type = "password";
+            button.textContent = "show";
+        }
+    }
+</script>
+
+{% endblock %}

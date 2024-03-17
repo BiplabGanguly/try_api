@@ -95,25 +95,25 @@
   }
 
 
-var apiDataElements = document.querySelectorAll('#api_data');
-apiDataElements.forEach(function(apiDataElement) {
-    apiDataElement.addEventListener('click', function(event) {
-        event.preventDefault();
-        var apiDataText = this.innerText;
-        var tempTextArea = document.createElement('textarea');
-        tempTextArea.value = apiDataText;
-        document.body.appendChild(tempTextArea);
-        tempTextArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(tempTextArea);
+  var apiDataElements = document.querySelectorAll('#api_data');
+  apiDataElements.forEach(function (apiDataElement) {
+    apiDataElement.addEventListener('click', function (event) {
+      event.preventDefault();
+      var apiDataText = this.innerText;
+      var tempTextArea = document.createElement('textarea');
+      tempTextArea.value = apiDataText;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextArea);
 
-        this.innerText = 'Copied!';
-        var apiDataElement = this;
-        setTimeout(function() {
-            apiDataElement.innerText = apiDataText;
-        }, 1500);
+      this.innerText = 'Copied!';
+      var apiDataElement = this;
+      setTimeout(function () {
+        apiDataElement.innerText = apiDataText;
+      }, 1500);
     });
-});
+  });
 
 </script>
 {% endblock %}
