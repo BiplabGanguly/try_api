@@ -1,92 +1,119 @@
-{% extends 'temp.html' %}
-
-{% block content %}
+{% extends 'temp.html' %} {% block content %}
 <style>
-    .api-container {
-        margin-top: 5rem;
-    }
+  .api-container {
+    margin-top: 5rem;
+  }
 
-    .api-card {
-        margin-top: 5vh;
-        background-color: #393E46;
-        color: white;
-        border:1px solid #222831;
-    }
+  .api-card {
+    margin-top: 5vh;
+    background-color: #393e46;
+    color: white;
+    box-shadow: 0 0 10px #222831;
+  }
 
+  .card-body h6 {
+    margin-left: 15vh;
+  }
 
-    .card-body h6 {
-        margin-left: 15vh;
-    }
+  .btn-desc {
+    background-color: #222831;
+    border-radius: 16px;
+    color: white;
+  }
 
-    .btn-desc{
-        background-color: #222831;
-        border-radius:16px;
-        color: white;
-    }
+  .btn-desc:hover {
+    background-color: #222831;
+    border-radius: 16px;
+    color: white;
+  }
 
-    .btn-desc:hover{
-        background-color: #222831;
-        border-radius:16px;
-        color: white;
-    }
+  .api_method {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    font-size: 1.2rem;
+    text-align: center;
+  }
 
-    .api_method{
-        margin-top:1vh;
-        margin-bottom:1vh;
-        font-size: 1.2rem;
-        text-align: center;
-    }
+  .api_box {
+    display: flex;
+    justify-content: center;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+  }
 
-    .api_box{
-      display:flex;
-      justify-content:center;
-      margin-top:1vh;
-      margin-bottom:1vh;
-    }
+  .api_text {
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    cursor: pointer;
+  }
 
-    .api_text{
-        width: 200px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        text-align:center;
-    }
-
-    .desc-box{
-        background-color:#222831;
-        color:white;
-        text-align:justify;
-        padding:1rem;
-        display: none;
-        transition: 0.3s ease-in-out;
-    }
+  .desc-box {
+    background-color: #222831;
+    color: white;
+    text-align: justify;
+    padding: 1rem;
+    display: none;
+    transition: 0.3s ease-in-out;
+  }
 </style>
 <div class="container api-container">
-    <div class="row">
-        {% for api in api_data %}
-        <div class="card api-card">
-            <div class="card-body row">
-                <div class="col-md-2 col-lg-2 col-sm-3 api_method" id ="api_method">{{ api.api_method }}</div>
-                <div class="col-md-8 col-lg-8 col-sm-6 api_box">
-                    <div class= "api_text">{{api.api_data}}</div> </div>
-                <div class="col-md-2 col-lg-2 col-sm-3"><button class="btn btn-desc form-control" onclick="toggleDesc(this)">Desc</button></div>
-            </div>
+  <div class="row">
+    {% for api in api_data %}
+    <div class="card api-card">
+      <div class="card-body row">
+        <div class="col-md-2 col-lg-2 col-sm-3 api_method" id="api_method">
+          {{ api.api_method }}
         </div>
-        <div class="card desc-box">{{api.api_description}}</div>
-        {% endfor %}
+        <div class="col-md-8 col-lg-8 col-sm-6 api_box">
+          <div class="api_text" id="api_data">{{api.api_data}}</div>
+        </div>
+        <div class="col-md-2 col-lg-2 col-sm-3">
+          <button class="btn btn-desc form-control" onclick="toggleDesc(this)">
+            Desc
+          </button>
+        </div>
+      </div>
     </div>
+    <div class="card desc-box">{{api.api_description}}</div>
+    {% endfor %}
+  </div>
 </div>
 <script>
-    function toggleDesc(button) {
-        let card = button.closest('.api-card');
+  function toggleDesc(button) {
+    let card = button.closest(".api-card");
 
-        var descBox = card.nextElementSibling;
-    
-        if (descBox.style.display === 'none' || descBox.style.display === '') {
-            descBox.style.display = 'block';
-        } else {
-            descBox.style.display = 'none';
-        }
+    var descBox = card.nextElementSibling;
+
+    if (descBox.style.display === "none" || descBox.style.display === "") {
+      descBox.style.display = "block";
+    } else {
+      descBox.style.display = "none";
     }
+  }
+
+
+var apiDataElements = document.querySelectorAll('#api_data');
+apiDataElements.forEach(function(apiDataElement) {
+    apiDataElement.addEventListener('click', function(event) {
+        event.preventDefault();
+        var apiDataText = this.innerText;
+        var tempTextArea = document.createElement('textarea');
+        tempTextArea.value = apiDataText;
+        document.body.appendChild(tempTextArea);
+        tempTextArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempTextArea);
+
+        this.innerText = 'Copied!';
+        var apiDataElement = this;
+        setTimeout(function() {
+            apiDataElement.innerText = apiDataText;
+        }, 1500);
+    });
+});
+
 </script>
 {% endblock %}
