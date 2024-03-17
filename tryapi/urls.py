@@ -22,4 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home, name="home"),
     path('<str:project>/api/<uuid:pid>/',views.api_data,name="api"),
+    path('adminuser/login/',views.admin_user_login,name="admin_login"),
+    path('adminuser/postlogin/',views.admin_user_pass,name="post_login"),
+    path('adminuser/<uid>/',views.admin_user,name='admin_user'),
+    
 ]

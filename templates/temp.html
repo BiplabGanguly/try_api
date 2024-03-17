@@ -29,13 +29,22 @@
 
         .navbar a {
             color: white;
-            font-size: 3.2vh;
-            margin-left: 3vh;
+            text-decoration:none;
+        }
+
+        .navbar-brand{
+            font-size:3vh;
+        }
+
+        .navbar-text{
+            font-size:2vh;
+            margin-right:5vh;
         }
     </style>
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'home' %}">TryAPI</a>
+            <a class="navbar-text" href="{% url 'admin_login' %}">Admin</a>
         </div>
     </nav>
 
